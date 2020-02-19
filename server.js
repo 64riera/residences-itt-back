@@ -17,9 +17,9 @@ app.use(cors())
 // app.use('/') /* This will be the students dashboard */
 // app.use('/dashboard') /* This will be the admin dashboard */
 
-app.use('/api', userRoutes) /* This will be the API for both dashboards */  
+app.use('/api', userRoutes) /* This will be the API for both dashboards */
 
 // Starting the server
 app.listen(app.get('port'), () => {
-    console.log(`Server runing on port ${app.get('port')}`)
+  console.log(`Server runing on port ${app.get('port')}`)
 })

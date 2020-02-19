@@ -7,6 +7,7 @@ router.get('/get', userController.getUsers)
 // Login & register routes
 router.post('/register', userController.registerUser)
 router.post('/login', userController.loginUser)
+router.get('/user', userController.getUser)
 
 // Step 1 - Residence Request
 router.post('/residence-application', userController.registerResApplication)
