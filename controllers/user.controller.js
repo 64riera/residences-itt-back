@@ -78,7 +78,7 @@ userController.registerResApplication = async (req, res) => {
     controlNum: req.body.controlNum,
     residenceData: [
       {
-        stepId: '1-A',
+        stepId: '1-C',
         stepState: 'Submited',
         fileData: [
           {
@@ -163,7 +163,8 @@ userController.getUser = async (req, res) => {
       residenceData: user.residenceData,
       email: user.email,
       name: user.name,
-      lastName: user.lastName
+      lastName: user.lastName,
+      controlNum: user.controlNum
     })
   } catch (err) {
     res.status(500).send({ err })
