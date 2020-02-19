@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const dbURI = 'mongodb://localhost:27017/itt-residences'
+const dbURI = 'mongodb+srv://64riera9985:t3JJwMYYyLN2Oxjn@itt-residences-bv0ak.mongodb.net/itt-residences?retryWrites=true&w=majority'
 
 mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
 const db = mongoose.connection
