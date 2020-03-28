@@ -1,3 +1,4 @@
+/* eslint-disable no-unreachable */
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 
@@ -169,6 +170,46 @@ userController.getUser = async (req, res) => {
   } catch (err) {
     res.status(500).send({ err })
   }
+}
+
+// Files Upload Section
+userController.uploadFileStep = async (req, res) => {
+  const auth = req.headers['auth-token']
+
+  try {
+    jwt.verify(auth, SECRET_KEY)
+  } catch (err) {
+    return res.status(403).send({ msg: 'Unauthorized req' })
+  }
+
+  const userData = req.body
+
+  try {
+    var user = await User.findOne({ controlNum: userData.controlNum })
+  } catch (err) {
+    return res.status(500).send({ err })
+  }
+
+  if (!user) return res.status(409).send({ msg: 'User doesnot exists' })
+
+  user.residenceData.push({
+    stepId: userData.stepId,
+    stepState: userData.stepState,
+    fileData: [
+      {
+        fileName: req.file.filename,
+        fileRoute: req.file.path,
+        fileFormat: req.file.originalname
+      }
+    ]
+  })
+
+  user.save((err, savedUser) => {
+    if (err) return res.status(500).send({ msg: err })
+    if (!savedUser) return res.status(409).send({ msg: 'User not saved' })
+
+    return res.status(200).send({ savedUser })
+  })
 }
 
 module.exports = userController
